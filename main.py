@@ -3,17 +3,16 @@ import requests
 def main() -> None:
     seats = get_seats_summary()
     messages = check_remaining_seats(seats['summary'])
-    print(messages)
     send_message(messages)
 
 def get_seats_summary() -> None:
     url = "https://ticket.melon.com/tktapi/product/block/summary.json?v=1" 
    
     body = {
-        'prodId': '209528',
+        'prodId': '209371',
         'pocCode': 'SC0002',
-        'scheduleNo': '100001',
-        'perfDate': '20240310',
+        'scheduleNo': '100002',
+        'perfDate': '',
         'seatGradeNo': '',
         'corpCodeNo': ''
     }
@@ -29,9 +28,6 @@ def get_seats_summary() -> None:
     }
 
     response = requests.post(url,headers=header,data=body)
-    for k, v in response.request.headers.items():
-        print(k + ": " + v)
-    
     return response.json()
 
 def check_remaining_seats(seats: list) -> list:
