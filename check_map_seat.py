@@ -7,7 +7,7 @@ def get_map_seats() -> None:
         'prodId': '210629',
         'pocCode': 'SC0002',
         'scheduleNo': '100001',
-        'blockId': '2099',
+        'blockId': '1807,1702', #getAreaMap.json > seatData > st > sbid
         'corpCodeNo': ''
     }
 
@@ -22,6 +22,7 @@ def get_map_seats() -> None:
     }
 
     response = requests.post(url,headers=header,data=body)
+    print(response.text)
     return response
 
 get_map_seats()
