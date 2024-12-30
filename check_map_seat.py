@@ -24,7 +24,7 @@ def get_map_seats() -> None:
 
     response = requests.post(url,headers=header,data=body)
     map_datas = json.loads(response.text.replace("/**/getSeatListCallBack(","").replace(");", ""))
-    
+    # 각 좌석 데이터 > seatMapList.json > seatData > st > list (rn : 행 번호)
     return response
 
 get_map_seats()
