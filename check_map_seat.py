@@ -26,7 +26,7 @@ def get_map_seats() -> None:
     map_datas = json.loads(response.text.replace("/**/getSeatListCallBack(","").replace(");", ""))
     count = 0
     for st in map_datas['seatData']['st'][0]['ss']:
-        if st['sid'] != None: 
+        if st['sid'] != 'null': 
             count += 1 
     print(count)
     # 각 좌석 데이터 > seatMapList.json > seatData > st > list (rn : 행 번호)
