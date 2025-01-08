@@ -8,6 +8,7 @@ prodId = ""
 pocCode = ""
 scheduleNo = ""
 cookie = ""
+slack_webhook_url = ""
 #######################################################
 #######################################################
 
@@ -59,7 +60,6 @@ def get_remain_seat_in_block(block) -> int:
     return count
 
 def send_message(message: str) -> None:
-    slack_webhook_url = "https://hooks.slack.com/services/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"
     response = requests.post(slack_webhook_url, json={'text' : message})
 
 def main() -> None:
