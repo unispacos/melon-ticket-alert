@@ -1,4 +1,5 @@
 import requests
+import time
 
 #######################################################
 ########### 아래 값 채워준 뒤 실행해주시면 됩니다. #############
@@ -12,10 +13,12 @@ slack_webhook_url = ""
 #######################################################
 
 def main() -> None:
-    seats = get_seats_summary()
-    messages = check_remaining_seats(seats['summary'])
-    send_message(messages)
-
+    for i in range(30):
+        seats = get_seats_summary()
+        messages = check_remaining_seats(seats['summary'])
+        send_message(messages)
+        time.sleep(2)
+        
 def get_seats_summary() -> None:
     url = "https://ticket.melon.com/tktapi/product/summary.json?v=1" 
    
@@ -40,8 +43,6 @@ def get_seats_summary() -> None:
 
 def check_remaining_seats(seats: list) -> list:
     result = []
-    
-    print(seats)
     
     for seat in seats:
         if seat['realSeatCntlk'] > 0:
