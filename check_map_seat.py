@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 #######################################################
 ########### 아래 값 채워준 뒤 실행해주시면 됩니다. #############
@@ -63,10 +64,12 @@ def send_message(message: str) -> None:
     response = requests.post(slack_webhook_url, json={'text' : message})
 
 def main() -> None:
-    blocks = get_block_list()
-    for block in blocks:
-        count = get_remain_seat_in_block(block)
-        if count > 0:
-            send_message(block['sntv']['a'] + "구역에 잔여좌석 " + str(count) + "개 발생!")
+    for i in range(30):
+        blocks = get_block_list()
+        for block in blocks:
+            count = get_remain_seat_in_block(block)
+            if count > 0:
+                send_message(block['sntv']['a'] + "구역에 잔여좌석 " + str(count) + "개 발생!")
+        time.sleep(2)
         
 main()
