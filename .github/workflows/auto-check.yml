@@ -24,5 +24,3 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run alert script
         run: python check_map_seat.py
-
-  workflow_dispatch:   # 이 줄 추가!
