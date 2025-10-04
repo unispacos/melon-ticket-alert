@@ -1,0 +1,26 @@
+name: Melon Ticket Alert
+
+on:
+  schedule:
+    - cron: "*/1 * * * *"  # 1분마다 실행
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    env:
+      PRODID: "211782"
+      POCCODE: "SC0002"
+      SCHEDULENO: "100003"
+      COOKIE: "PCID=17556875702275130360238; _fwb=223VZG4pADhVnhHFOH5fTws.1755687570228; PC_PCID=17556875702275130360238; POC=MP10; _T_ANO=iUnLJuzpqG92Ns8dTM2b8TMLrM8TJ9SNN8ExIU128d5PZnAO1NUfmwKtmir8KOpR9O6AqxQSUmDvLmubDhP7jmgQ1zFMw0HGILB3F3E0ehvr+8eKSqRrPXNCv3CH6/msy0xdEuJVMA91zdPhU+KavSJCgGNlDmbOqSLeX6/wzzjz7YO4QiWgpTVRCI/hq1Kiz3qwYoarND5pQ1C62mVCRcUi2pJQ6grubFTj8IcedR4sD6zEZE3yMS0Hd+WNe5N3lJf876afbE2dOnxGaGSC+WzSd9esCLtyB/u7pnwVKzpAcbCCDoUTW8QM/S5UCmwsotOZKsLJtUnsG2Bove6xtg==; TKT_POC_ID=MP15; hide_banner=true; cbo=0; MAC=G86hhkkWECwD3+XzKKBtL17ZQpPpEPxEXUhvMNKQjg8vIbEgDAmK2wrC3fpz6s0W; MLCP=MjU2MTcyOTQlM0J3aGl0ZXl1cmltJTNCJTNCMCUzQmV5SmhiR2NpT2lKSVV6STFOaUo5LmV5SnBjM01pT2lKdFpXMWlaWEl1YldWc2IyNHVZMjl0SWl3aWMzVmlJam9pYldWc2IyNHRhbmQwSWl3aWFXRjBJam94TnpVNU5Ua3dPVGczTENKdFpXMWlaWEpMWlhraU9pSXlOVFl4TnpJNU5DSXNJbUYxZEc5TWIyZHBibGxPSWpvaVRpSjkuaXg5LTZTYmVhYmU4UDNBcGZicVBrdmQ0Z2tuQlU1b05VcG5OeGdMRk4zTSUzQiUzQjIwMjUxMDA1MDAxNjI3JTNCbXlteXZydnIlM0IxJTNCeXVyaW15aSU0MG5hdmVyLmNvbSUzQjIlM0I=; MUS=1291887357; keyCookie=25617294; NetFunnel_ID=WP15; store_melon_cupn_check=25617294; performance_layer_alert=%2C211782; wcs_bt=s_585b06516861:1759593391; JSESSIONID=E1227ECEA3102070F12A21F7F1013F4B"
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run alert script
+        run: python check_map_seat.py
