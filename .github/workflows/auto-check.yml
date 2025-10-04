@@ -3,6 +3,7 @@ name: Melon Ticket Alert
 on:
   schedule:
     - cron: "*/1 * * * *"  # 1분마다 실행
+  workflow_dispatch:
 
 jobs:
   alert:
