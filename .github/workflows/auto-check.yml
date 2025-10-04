@@ -25,7 +25,4 @@ jobs:
       - name: Run alert script
         run: python check_map_seat.py
 
-on:
-  schedule:
-    - cron: "*/1 * * * *"
   workflow_dispatch:   # 이 줄 추가!
