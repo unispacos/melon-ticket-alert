@@ -40,8 +40,12 @@ def get_seats_summary() -> None:
 
     response = requests.post(url,headers=header,data=body)
     print(response.text)
-
-    return response.json()
+    print("응답값:", response.text)
+    try:
+        return response.json()
+    except Exception as e:
+        print("JSON 파싱 에러:", e)
+        return {"summary": []}
 
 def check_remaining_seats(seats: list) -> list:
     result = []
