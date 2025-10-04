@@ -39,6 +39,8 @@ def get_seats_summary() -> None:
     }
 
     response = requests.post(url,headers=header,data=body)
+    print(response.text)
+
     return response.json()
 
 def check_remaining_seats(seats: list) -> list:
