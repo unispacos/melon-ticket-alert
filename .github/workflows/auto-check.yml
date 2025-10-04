@@ -24,4 +24,4 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run alert script
-        run: python check_map_seat.py
+        run: python count_remain_seat.py
